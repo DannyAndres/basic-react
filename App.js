@@ -1,23 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+//paquetes externos
+import { Scene, Router, Stack, Actions } from 'react-native-router-flux';
+import * as firebase from 'firebase';
+
+//vistas
+import Home from './resources/views/home';
+
+
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const firebaseConfig = {
+      apiKey: '',
+      authDomain: '',
+      databaseURL: '',
+      storageBucket: '',
+    }
+    //firebase.initializeApp(firebaseConfig);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Router>
+        <Stack key="root">
+          <Scene key="Home" component={Home} hideNavBar/>
+        </Stack>
+      </Router>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
